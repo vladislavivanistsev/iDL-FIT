@@ -16,7 +16,7 @@ plt.rc('legend', fontsize=8)
 plt.rc('figure', titlesize=10)
 
 # Electrolyte model parameters
-sM_neg, sM_pos = -60, 80
+sM_neg, sM_pos = -40, 60
 N = 201
 tol, max_iter = 1e-8, 10000
 
@@ -28,18 +28,19 @@ s_neg = -s_pos
 a = 2 # Quantum capacitance minima at uq = 0 (PZC)
 b = 21 # Slope of quantum capacitance dependence on uq
 uq_neg = -np.sqrt((np.sqrt((2*s_neg)**2 + a**4) - a**2) / b**2)
-uq_pos =  np.sqrt((np.sqrt((2*s_neg)**2 + a**4) - a**2) / b**2)
+uq_pos =  np.sqrt((np.sqrt((2*s_pos)**2 + a**4) - a**2) / b**2)
 Cq_neg = ((a**2+b**2)*uq_neg**2 + a**2)/(2*np.sqrt(b**2*uq_neg**2 + a**2))
-Cq_pos = ((a**2+b**2)*uq_neg**2 + a**2)/(2*np.sqrt(b**2*uq_pos**2 + a**2))
+Cq_pos = ((a**2+b**2)*uq_pos**2 + a**2)/(2*np.sqrt(b**2*uq_pos**2 + a**2))
 Cq_neg_inv = 1 / ((a**2+b**2)*uq_neg**2 + a**2)/(2*np.sqrt(b**2*uq_neg**2 + a**2))
-Cq_pos_inv = 1 / ((a**2+b**2)*uq_neg**2 + a**2)/(2*np.sqrt(b**2*uq_pos**2 + a**2))
+Cq_pos_inv = 1 / ((a**2+b**2)*uq_pos**2 + a**2)/(2*np.sqrt(b**2*uq_pos**2 + a**2))
 # Parameter lists
-uM_neg_list = np.linspace(-15, -6, 10)
-uM_pos_list = np.linspace(8, 20, 10)
+uM_neg_list = np.linspace(-10, -4, 10)
+uM_pos_list = np.linspace(6, 15, 10)
+
 aM_pos_list = np.linspace(0.2, 1, 20)
 aM_neg_list = np.linspace(0.2, 1, 20)
-k_neg_list  = np.linspace(3, 11, 5)
-k_pos_list  = np.linspace(3, 11, 5)
+k_neg_list  = np.linspace(3, 12, 5)
+k_pos_list  = np.linspace(3, 12, 5)
 param_combos = list(product(uM_neg_list, uM_pos_list,
                             aM_neg_list, aM_pos_list,
                              k_neg_list,  k_pos_list))
